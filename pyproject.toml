@@ -1,0 +1,21 @@
+[project]
+name = "mini-crm"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Abzal",email = "k4bdoldaev@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi[standard] (>=0.128.0,<0.129.0)",
+    "asyncpg (>=0.31.0,<0.32.0)",
+    "psycopg2-binary (>=2.9.11,<3.0.0)",
+    "greenlet (>=3.3.0,<4.0.0)",
+    "alembic (>=1.18.1,<2.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
