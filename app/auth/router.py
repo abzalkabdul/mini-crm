@@ -2,6 +2,7 @@ import hashlib
 from datetime import datetime, timezone
 
 from fastapi import APIRouter, status, HTTPException
+from fastapi.security import HTTPBearer
 
 from sqlalchemy import select, UUID
 from app.database import SessionDep
@@ -14,7 +15,11 @@ from fastapi.params import Depends
 
 from app.utils.rate_limiter import rate_limit_ok, rate_limit_login
 
-router = APIRouter()
+http_bearer = HTTPBearer(auto_error=False)
+
+router = APIRouter(prefix="/auth",
+                   tags=["JWT"],
+                   dependencies=[Depends(http_bearer)])
 
 @router.get("/ok", dependencies=[Depends(rate_limit_ok)])
 async def ok_state():
