@@ -1,10 +1,59 @@
 services:
+  pg:
+    image: postgres
+    environment:
+      POSTGRES_DB: crm
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+
+
   redis_container:
     image: redis:7
     ports:
       - 6379:6379
 
   redis_gui:
-      image: redis/redisinsight:latest
-      ports:
+    image: redis/redisinsight:latest
+    ports:
       - 5540:5540
+
+
+  rabbitmq_container:
+    image: rabbitmq:3-management-alpine
+    hostname: rabbitmq
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: "guest"
+      RABBITMQ_DEFAULT_PASS: "guest"
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+
+  maildev:
+      image: maildev/maildev
+      ports:
+        - "8080:1080"
+        - "1025:1025"
+      environment:
+        - TZ=Asia/Almaty
+        - MAILDEV_WEB_PORT=1080
+        - MAILDEV_SMTP_PORT=1025
+      logging:
+        driver: "json-file"
+        options:
+          max-size: "1m"
+
+
+
+volumes:
+  rabbitmq-data:
+  pg-data:
+
+
+

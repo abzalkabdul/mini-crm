@@ -10,6 +10,6 @@ class Deal(Base):
     deal_uuid: Mapped[uuid_pk]
     name: Mapped[str_50]
     amount: Mapped[int]
-    status: Status
+    status: Mapped[Status]
     contact_uuid: Mapped[uuid_fk] = mapped_column(ForeignKey("contacts.contact_uuid"))
-    owner_uuid: Mapped[uuid_fk] = mapped_column(ForeignKey("user.user_uuid"))
+    owner_uuid: Mapped[uuid_fk] = mapped_column(ForeignKey("users.user_uuid"))

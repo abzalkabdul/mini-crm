@@ -7,6 +7,9 @@ from alembic import context
 from app.database import Base
 from app.config import Settings
 from app.models.user import User
+from app.models.task import Task
+from app.models.deal import Deal
+from app.models.contact import Contact
 
 
 config = context.config
